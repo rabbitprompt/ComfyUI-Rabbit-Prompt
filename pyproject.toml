@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-rabbit-prompt"
+description = "Generate prompts from your Rabbit projects directly in ComfyUI."
+version = "1.0.0"
+license = { text = "MIT" }
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/rabbitprompt/ComfyUI-Rabbit-Prompt"
+
+[tool.comfy]
+PublisherId = "rabbitprompt"
+DisplayName = "ComfyUI-Rabbit-Prompt"
+Icon = ""
