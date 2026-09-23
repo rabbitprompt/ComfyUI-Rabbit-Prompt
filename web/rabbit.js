@@ -59,8 +59,8 @@ app.registerExtension({
   name: "rabbit.prompt",
 
   async setup() {
-    // after each Run with "New prompt on every run", the server sends back the
-    // fresh prompt: show it in the node and in the connected CLIP
+    // after each Run the server sends back the fresh prompt: show it in the
+    // node and in the connected CLIP
     api.addEventListener("executed", (e) => {
       const output = e.detail?.output;
       if (!output?.rabbit_prompt) return;
@@ -82,8 +82,6 @@ app.registerExtension({
       const node = this;
       const apiKeyWidget = node.widgets.find((w) => w.name === "api_key");
       const projectWidget = node.widgets.find((w) => w.name === "project");
-      const newPromptWidget = node.widgets.find((w) => w.name === "new_prompt_on_run");
-      if (newPromptWidget) newPromptWidget.label = "New prompt on every run";
       const promptWidget = node.widgets.find((w) => w.name === "prompt");
 
       // purple theme
@@ -251,8 +249,8 @@ app.registerExtension({
       });
       copyButton.serializeValue = () => undefined;
 
-      // layout: api_key, activate, signup, divider, project, new prompt toggle, prompt, copy, generate, status line
-      node.widgets = [apiKeyWidget, activateButton, signupButton, divider, projectWidget, newPromptWidget, promptWidget, copyButton, generateButton, statusWidget].filter(Boolean);
+      // layout: api_key, activate, signup, divider, project, prompt, copy, generate, status line
+      node.widgets = [apiKeyWidget, activateButton, signupButton, divider, projectWidget, promptWidget, copyButton, generateButton, statusWidget].filter(Boolean);
       const size = node.computeSize();
       node.setSize([Math.max(size[0], 420), size[1]]);
 

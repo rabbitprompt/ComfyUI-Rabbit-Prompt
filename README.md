@@ -8,7 +8,7 @@ Generate prompts from your Rabbit projects directly inside ComfyUI.
 - Pick one of your Rabbit projects
 - Click **Generate Prompt** — the prompt is composed server-side from your project's blocks, connectors, weights and locks
 - The output connects to any text input (a CLIP Text Encode node is created and connected automatically)
-- Enable **New prompt on every run** to get a fresh prompt on each queue run
+- Every queue run fetches a fresh prompt from your Rabbit project — reroll behavior is controlled in your Rabbit project, not in the node
 
 ## Get your API key
 
@@ -16,14 +16,10 @@ Log in to your Rabbit account → Settings → API → **Generate API Key**. Cop
 
 ## Installation
 
-### Via ComfyUI Manager
-Search for `ComfyUI-Rabbit-Prompt` and click Install.
-
-### Manually
-
+```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/rabbitprompt/ComfyUI-Rabbit-Prompt.git
-plain
+```
 
 Then restart ComfyUI.
 

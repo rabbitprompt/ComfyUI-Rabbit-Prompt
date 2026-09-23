@@ -121,7 +121,6 @@ class RabbitPrompt:
         return {"required": {
             "api_key": ("STRING", {"default": "", "placeholder": "sk_... (remembered after first use)"}),
             "project": (projects,),
-            "new_prompt_on_run": ("BOOLEAN", {"default": True}),
             "prompt": ("STRING", {"multiline": True, "default": "", "placeholder": "Your generated prompt will appear here"}),
         }}
 
@@ -132,16 +131,12 @@ class RabbitPrompt:
     DESCRIPTION = "Generate a prompt from your Rabbit project."
 
     @classmethod
-    def IS_CHANGED(cls, api_key, project, new_prompt_on_run, prompt):
-        # ComfyUI skips nodes whose inputs did not change; with the toggle on we
-        # must run every time to fetch a fresh prompt
-        if not new_prompt_on_run:
-            return False
+    def IS_CHANGED(cls, api_key, project, prompt):
+        # ComfyUI skips nodes whose inputs did not change; every run must fetch
+        # a fresh prompt, so the node always re-executes
         return time.time()
 
-    def run(self, api_key, project, new_prompt_on_run, prompt):
-        if not new_prompt_on_run:
-            return (prompt,)
+    def run(self, api_key, project, prompt):
         key = get_api_key({"api_key": api_key})
         if not key:
             raise ValueError("No API key. Paste your sk_... key in the node and activate it.")
